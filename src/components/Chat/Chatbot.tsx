@@ -118,7 +118,7 @@ export default function Chatbot() {
     };
 
     return (
-        <div style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 1000 }}>
+        <div className="chatbot-container">
             {/* Trigger Button */}
             {!isOpen && (
                 <button
@@ -143,17 +143,7 @@ export default function Chatbot() {
 
             {/* Chat Window */}
             {isOpen && (
-                <div style={{
-                    width: '380px',
-                    height: '600px',
-                    background: 'var(--card)',
-                    borderRadius: 'var(--radius)',
-                    boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.2)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    border: '1px solid var(--border)',
-                    overflow: 'hidden'
-                }}>
+                <div className="chatbot-window">
                     {/* Header */}
                     <div style={{
                         padding: '1.25rem',
