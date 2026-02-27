@@ -25,7 +25,7 @@ export default function Chatbot() {
 
     useEffect(() => {
         if (isOpen && messages.length === 0) {
-            addBotMessage('¡Hola! Soy el asistente virtual de PRECONSTRU WT. ¿En qué podemos ayudarte hoy?');
+            addBotMessage('¡Hola! Soy el asistente virtual de CONSTRU WT. ¿En qué podemos ayudarte hoy?');
             setTimeout(() => {
                 addBotMessage('¿Qué tipo de producto estás buscando?');
                 setStep('product');
@@ -165,7 +165,7 @@ export default function Chatbot() {
                     }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <div style={{ width: '10px', height: '10px', background: '#22c55e', borderRadius: '50%' }}></div>
-                            <span style={{ fontWeight: 600 }}>Asistente PRECONSTRU WT</span>
+                            <span style={{ fontWeight: 600 }}>Asistente CONSTRU WT</span>
                         </div>
                         <button onClick={() => setIsOpen(false)} style={{ color: 'white' }}>
                             <X size={20} />

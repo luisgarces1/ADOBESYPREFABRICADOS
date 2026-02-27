@@ -3,8 +3,11 @@ import './globals.css';
 import Chatbot from '@/components/Chat/Chatbot';
 
 export const metadata: Metadata = {
-    title: 'Concreto & Diseño | Adobes y Prefabricados',
+    title: 'INVERSIONES CONSTRU WT | Adobes y Prefabricados',
     description: 'Soluciones duraderas en concreto: adobes, prefabricados y mobiliario de alta calidad para tus proyectos.',
+    icons: {
+        icon: '/images/LOGO.jpeg',
+    },
 };
 
 export default function RootLayout({

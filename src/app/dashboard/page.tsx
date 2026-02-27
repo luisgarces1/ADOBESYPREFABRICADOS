@@ -12,6 +12,7 @@ import {
     CheckCircle,
     Mail
 } from 'lucide-react';
+import NextImage from 'next/image';
 
 interface Lead {
     id: string;
@@ -139,11 +140,22 @@ export default function Dashboard() {
         <div style={{ minHeight: '100vh', display: 'flex', background: '#f8fafc' }}>
             {/* Sidebar */}
             <aside style={{ width: '280px', background: 'white', borderRight: '1px solid var(--border)', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-                <div>
-                    <div style={{ fontWeight: 900, fontSize: '1.3rem', color: 'var(--primary)', letterSpacing: '-0.5px' }}>
-                        CONSTRU <span style={{ color: 'var(--accent)' }}>WT</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <NextImage
+                        src="/images/LOGO.jpeg"
+                        alt="Logo"
+                        width={40}
+                        height={40}
+                        style={{ objectFit: 'contain' }}
+                    />
+                    <div>
+                        <div style={{ fontWeight: 900, fontSize: '1rem', color: 'var(--primary)', lineHeight: 1 }}>
+                            INVERSIONES
+                        </div>
+                        <div style={{ fontWeight: 900, fontSize: '1rem', color: 'var(--accent)', lineHeight: 1 }}>
+                            CONSTRU <span style={{ color: 'var(--primary)' }}>WT</span>
+                        </div>
                     </div>
-                    <div style={{ fontSize: '0.7rem', color: 'var(--muted-foreground)', fontWeight: 600, marginTop: '2px' }}>DASHBOARD ADMINISTRATIVO</div>
                 </div>
 
                 <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
