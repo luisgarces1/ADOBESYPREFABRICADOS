@@ -159,9 +159,9 @@ export default function Dashboard() {
     });
 
     return (
-        <div style={{ minHeight: '100vh', display: 'flex', background: '#f8fafc' }}>
+        <div className="dashboard-layout">
             {/* Sidebar */}
-            <aside style={{ width: '280px', background: 'white', borderRight: '1px solid var(--border)', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            <aside className="dashboard-sidebar">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     <NextImage
                         src="/images/LOGO.jpeg"
@@ -212,10 +212,10 @@ export default function Dashboard() {
             </aside>
 
             {/* Main Content */}
-            <main style={{ flex: 1, padding: '3rem', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem' }}>
+            <main className="dashboard-main">
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
                     <div>
-                        <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem' }}>
+                        <h1 style={{ fontSize: 'clamp(1.5rem, 5vw, 2rem)', fontWeight: 800, marginBottom: '0.5rem' }}>
                             {activeTab === 'All' ? 'Panel General' : activeTab === 'Pedidos' ? 'Gestión de Pedidos' : 'Calendario de Asesorías'}
                         </h1>
                         <p style={{ color: 'var(--muted-foreground)' }}>Tienes {filteredLeads.length} registros en esta categoría.</p>
@@ -255,111 +255,109 @@ export default function Dashboard() {
                 </div>
 
                 {/* Table */}
-                <div className="card" style={{ padding: 0, overflow: 'hidden', borderRadius: '24px', border: '1px solid var(--border)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-                    <div style={{ overflowX: 'auto' }}>
-                        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                            <thead style={{ background: '#f8fafc', textAlign: 'left', borderBottom: '1px solid var(--border)' }}>
-                                <tr>
-                                    <th style={thStyle}>CLIENTE</th>
-                                    <th style={thStyle}>PRODUCTO / SERVICIO</th>
-                                    <th style={thStyle}>ESTADO</th>
-                                    <th style={thStyle}>FECHA</th>
-                                    <th style={thStyle}>ACCIONES</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {loading ? (
-                                    <tr><td colSpan={5} style={{ padding: '4rem', textAlign: 'center', color: 'var(--muted-foreground)' }}>Cargando registros...</td></tr>
-                                ) : filteredLeads.length === 0 ? (
-                                    <tr><td colSpan={5} style={{ padding: '4rem', textAlign: 'center', color: 'var(--muted-foreground)' }}>No hay datos para mostrar en esta categoría.</td></tr>
-                                ) : filteredLeads.map((lead) => (
-                                    <tr key={lead.id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }}>
-                                        <td style={tdStyle}>
-                                            <div style={{ fontWeight: 700, color: 'var(--primary)' }}>{lead.name}</div>
-                                            <div style={{ fontSize: '0.8rem', color: 'var(--muted-foreground)' }}>{lead.email}</div>
-                                            <div style={{ fontSize: '0.8rem', color: 'var(--muted-foreground)' }}>{lead.phone}</div>
-                                        </td>
-                                        <td style={tdStyle}>
-                                            <div style={{ fontSize: '0.9rem', fontWeight: 600, maxWidth: '400px' }}>{lead.product}</div>
-                                        </td>
-                                        <td style={tdStyle}>
-                                            <select
-                                                value={lead.status}
-                                                onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
+                <div className="table-container">
+                    <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '800px' }}>
+                        <thead style={{ background: '#f8fafc', textAlign: 'left', borderBottom: '1px solid var(--border)' }}>
+                            <tr>
+                                <th style={thStyle}>CLIENTE</th>
+                                <th style={thStyle}>PRODUCTO / SERVICIO</th>
+                                <th style={thStyle}>ESTADO</th>
+                                <th style={thStyle}>FECHA</th>
+                                <th style={thStyle}>ACCIONES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {loading ? (
+                                <tr><td colSpan={5} style={{ padding: '4rem', textAlign: 'center', color: 'var(--muted-foreground)' }}>Cargando registros...</td></tr>
+                            ) : filteredLeads.length === 0 ? (
+                                <tr><td colSpan={5} style={{ padding: '4rem', textAlign: 'center', color: 'var(--muted-foreground)' }}>No hay datos para mostrar en esta categoría.</td></tr>
+                            ) : filteredLeads.map((lead) => (
+                                <tr key={lead.id} style={{ borderBottom: '1px solid #f1f5f9', transition: 'background 0.2s' }}>
+                                    <td style={tdStyle}>
+                                        <div style={{ fontWeight: 700, color: 'var(--primary)' }}>{lead.name}</div>
+                                        <div style={{ fontSize: '0.8rem', color: 'var(--muted-foreground)' }}>{lead.email}</div>
+                                        <div style={{ fontSize: '0.8rem', color: 'var(--muted-foreground)' }}>{lead.phone}</div>
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <div style={{ fontSize: '0.9rem', fontWeight: 600, maxWidth: '400px' }}>{lead.product}</div>
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <select
+                                            value={lead.status}
+                                            onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
+                                            style={{
+                                                padding: '0.4rem 0.8rem',
+                                                borderRadius: '20px',
+                                                fontSize: '0.8rem',
+                                                fontWeight: 700,
+                                                border: 'none',
+                                                cursor: 'pointer',
+                                                color: 'white',
+                                                background: getStatusColor(lead.status),
+                                                outline: 'none',
+                                                appearance: 'none',
+                                                textAlign: 'center'
+                                            }}
+                                        >
+                                            <option value="Nuevo">NUEVO</option>
+                                            <option value="Agendado">AGENDADO</option>
+                                            <option value="En Producción">EN PRODUCCIÓN</option>
+                                            <option value="Cliente Perdido">CLIENTE PERDIDO</option>
+                                            <option value="Llamar Después">LLAMAR DESPUÉS</option>
+                                            <option value="En Proceso">EN PROCESO</option>
+                                            <option value="En Negociación">EN NEGOCIACIÓN</option>
+                                            <option value="Pago">PAGO</option>
+                                            <option value="Debe">DEBE</option>
+                                        </select>
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <div style={{ fontSize: '0.85rem' }}>
+                                            {isNaN(Date.parse(lead.created_at)) ? lead.created_at : new Date(lead.created_at).toLocaleDateString()}
+                                        </div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--muted-foreground)' }}>
+                                            {isNaN(Date.parse(lead.created_at)) ? '' : new Date(lead.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                        </div>
+                                    </td>
+                                    <td style={tdStyle}>
+                                        <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                            <button
+                                                className="btn hover-scale"
+                                                title="Contactar por WhatsApp"
                                                 style={{
-                                                    padding: '0.4rem 0.8rem',
-                                                    borderRadius: '20px',
-                                                    fontSize: '0.8rem',
-                                                    fontWeight: 700,
-                                                    border: 'none',
-                                                    cursor: 'pointer',
+                                                    padding: '0.6rem',
+                                                    background: '#22c55e',
                                                     color: 'white',
-                                                    background: getStatusColor(lead.status),
-                                                    outline: 'none',
-                                                    appearance: 'none',
-                                                    textAlign: 'center'
+                                                    borderRadius: '12px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                    boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)'
+                                                }}
+                                                onClick={() => window.open(`https://wa.me/57${lead.phone.replace(/\D/g, '')}`, '_blank')}
+                                            >
+                                                <MessageSquare size={18} />
+                                            </button>
+                                            <button
+                                                onClick={() => deleteLead(lead.id)}
+                                                className="btn hover-scale"
+                                                title="Eliminar registro"
+                                                style={{
+                                                    padding: '0.6rem',
+                                                    background: '#fee2e2',
+                                                    borderRadius: '12px',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center'
                                                 }}
                                             >
-                                                <option value="Nuevo">NUEVO</option>
-                                                <option value="Agendado">AGENDADO</option>
-                                                <option value="En Producción">EN PRODUCCIÓN</option>
-                                                <option value="Cliente Perdido">CLIENTE PERDIDO</option>
-                                                <option value="Llamar Después">LLAMAR DESPUÉS</option>
-                                                <option value="En Proceso">EN PROCESO</option>
-                                                <option value="En Negociación">EN NEGOCIACIÓN</option>
-                                                <option value="Pago">PAGO</option>
-                                                <option value="Debe">DEBE</option>
-                                            </select>
-                                        </td>
-                                        <td style={tdStyle}>
-                                            <div style={{ fontSize: '0.85rem' }}>
-                                                {isNaN(Date.parse(lead.created_at)) ? lead.created_at : new Date(lead.created_at).toLocaleDateString()}
-                                            </div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--muted-foreground)' }}>
-                                                {isNaN(Date.parse(lead.created_at)) ? '' : new Date(lead.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                                            </div>
-                                        </td>
-                                        <td style={tdStyle}>
-                                            <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                                <button
-                                                    className="btn hover-scale"
-                                                    title="Contactar por WhatsApp"
-                                                    style={{
-                                                        padding: '0.6rem',
-                                                        background: '#22c55e',
-                                                        color: 'white',
-                                                        borderRadius: '12px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center',
-                                                        boxShadow: '0 4px 12px rgba(34, 197, 94, 0.3)'
-                                                    }}
-                                                    onClick={() => window.open(`https://wa.me/57${lead.phone.replace(/\D/g, '')}`, '_blank')}
-                                                >
-                                                    <MessageSquare size={18} />
-                                                </button>
-                                                <button
-                                                    onClick={() => deleteLead(lead.id)}
-                                                    className="btn hover-scale"
-                                                    title="Eliminar registro"
-                                                    style={{
-                                                        padding: '0.6rem',
-                                                        background: '#fee2e2',
-                                                        borderRadius: '12px',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        justifyContent: 'center'
-                                                    }}
-                                                >
-                                                    <Trash2 size={18} color="#ef4444" />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                                                <Trash2 size={18} color="#ef4444" />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </main>
         </div>

@@ -17,7 +17,7 @@ import Catalog from '@/components/Catalog';
 export default function Home() {
     return (
         <div className="landing-page">
-            <nav style={{
+            <nav className="nav-container" style={{
                 padding: '1.25rem 2rem',
                 display: 'flex',
                 justifyContent: 'space-between',
@@ -46,7 +46,7 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
-                <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
+                <div className="mobile-hide" style={{ gap: '2.5rem', alignItems: 'center' }}>
                     <a href="#productos" style={{ fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Catálogo</a>
                     <a href="#beneficios" style={{ fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Beneficios</a>
                     <a href="#agenda" style={{ fontWeight: 700, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Agendar</a>
@@ -54,11 +54,16 @@ export default function Home() {
                         Contacto Directo
                     </a>
                 </div>
+                {/* Mobile Button - only shows when desktop nav is hidden */}
+                <div className="hide-tablet" style={{ display: 'none' }}>
+                    <a href="https://wa.me/573166211316" target="_blank" className="btn btn-primary" style={{ padding: '0.6rem 1rem', fontSize: '0.7rem' }}>
+                        WhatsApp
+                    </a>
+                </div>
             </nav>
 
             {/* Hero Section */}
-            <section style={{
-                padding: '10rem 1.5rem',
+            <section className="section-padding" style={{
                 textAlign: 'left',
                 background: 'linear-gradient(rgba(33, 37, 41, 0.7), rgba(33, 37, 41, 0.85)), url("/images/FABRICACION  EN SITIO.jpeg")',
                 backgroundSize: 'cover',
@@ -84,14 +89,14 @@ export default function Home() {
                     }}>
                         Ingeniería en Concreto
                     </span>
-                    <h1 style={{ fontSize: '5.5rem', marginBottom: '2rem', lineHeight: 0.95, fontWeight: 900, textTransform: 'uppercase' }}>
+                    <h1 className="hero-title" style={{ fontSize: '5.5rem', marginBottom: '2rem', lineHeight: 0.95, fontWeight: 900, textTransform: 'uppercase' }}>
                         Solidez que <br />
                         <span style={{ color: 'var(--accent)' }}>Trasciende</span>
                     </h1>
-                    <p style={{ fontSize: '1.4rem', marginBottom: '3.5rem', maxWidth: '700px', opacity: 0.95, fontWeight: 300, lineHeight: 1.6 }}>
+                    <p className="hero-text" style={{ fontSize: '1.4rem', marginBottom: '3.5rem', maxWidth: '700px', opacity: 0.95, fontWeight: 300, lineHeight: 1.6 }}>
                         Fabricamos prefabricados de alto rendimiento para proyectos que exigen durabilidad, diseño y precisión técnica en todo el territorio nacional.
                     </p>
-                    <div style={{ display: 'flex', gap: '1.5rem' }}>
+                    <div className="hero-buttons" style={{ display: 'flex', gap: '1.5rem' }}>
                         <a href="#productos" className="btn btn-accent" style={{ padding: '1.2rem 2.5rem' }}>
                             Ver Catálogo Pro
                         </a>

@@ -204,7 +204,7 @@ export default function BookingCalendar() {
 
             <div style={{ marginBottom: '2rem' }}>
                 <p style={{ fontSize: '0.9rem', marginBottom: '1rem', color: 'var(--muted-foreground)' }}>Selecciona una hora:</p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0.5rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '0.5rem' }}>
                     {timeSlots.map((time) => {
                         const isTaken = isSlotBooked(selectedDate, time);
                         return (

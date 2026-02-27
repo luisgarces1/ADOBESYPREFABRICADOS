@@ -206,7 +206,7 @@ export default function Catalog() {
                         className="cart-sidebar"
                         style={{
                             width: '450px',
-                            maxWidth: '90%',
+                            maxWidth: '100%',
                             background: 'white',
                             height: '100%',
                             padding: '2.5rem',
