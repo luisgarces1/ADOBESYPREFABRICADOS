@@ -10,7 +10,8 @@ import {
     Clock,
     MessageSquare,
     CheckCircle,
-    Mail
+    Mail,
+    Trash2
 } from 'lucide-react';
 import NextImage from 'next/image';
 
@@ -102,6 +103,27 @@ export default function Dashboard() {
         } catch (err) {
             console.error('Update status error:', err);
             alert('Error de conexión al actualizar el estado');
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    async function deleteLead(id: string) {
+        if (!confirm('¿Estás seguro de que deseas eliminar este registro?')) return;
+        setLoading(true);
+        try {
+            const response = await fetch(`https://sheetdb.io/api/v1/5w6qrdltna61x/id (Identificador único del registro)/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (response.ok) {
+                setLeads(prev => prev.filter(lead => lead.id !== id));
+            } else {
+                alert('Error al eliminar el registro en Google Sheets');
+            }
+        } catch (err) {
+            console.error('Delete Error:', err);
+            alert('Error de conexión al intentar eliminar');
         } finally {
             setLoading(false);
         }
@@ -316,9 +338,21 @@ export default function Dashboard() {
                                                 >
                                                     <MessageSquare size={18} />
                                                 </button>
-                                                <a href={`mailto:${lead.email}`} style={{ padding: '0.6rem', background: '#f1f5f9', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                                    <Mail size={18} color="#64748b" />
-                                                </a>
+                                                <button
+                                                    onClick={() => deleteLead(lead.id)}
+                                                    className="btn hover-scale"
+                                                    title="Eliminar registro"
+                                                    style={{
+                                                        padding: '0.6rem',
+                                                        background: '#fee2e2',
+                                                        borderRadius: '12px',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        justifyContent: 'center'
+                                                    }}
+                                                >
+                                                    <Trash2 size={18} color="#ef4444" />
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
